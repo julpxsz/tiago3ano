@@ -1,16 +1,39 @@
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+
+
+public class AudioManager: MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    #region Private Fields
+
+    private List<AudioSource> systemSourceChannels;
+    private List<AudioSource> activeSources;
+    
+    #endregion
+    
+    public static AudioManager Instance;
+
+    #region singleton
+    private void Awake()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            systemSourceChannels = new List<AudioSource>();
+            activeSources = new List<AudioSource>();
+
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    #endregion
+
+}
+
+internal class List<T>
+{
 }
